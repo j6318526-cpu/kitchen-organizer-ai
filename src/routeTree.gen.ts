@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as MembersRouteImport } from './routes/members'
 import { Route as RecipesRouteImport } from './routes/recipes'
 import { Route as ShoppingRouteImport } from './routes/shopping'
 
@@ -22,6 +23,11 @@ const IndexRoute = IndexRouteImport.update({
 const InventoryRoute = InventoryRouteImport.update({
   id: '/inventory',
   path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MembersRoute = MembersRouteImport.update({
+  id: '/members',
+  path: '/members',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RecipesRoute = RecipesRouteImport.update({
@@ -38,12 +44,14 @@ const ShoppingRoute = ShoppingRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
+  '/members': typeof MembersRoute
   '/recipes': typeof RecipesRoute
   '/shopping': typeof ShoppingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
+  '/members': typeof MembersRoute
   '/recipes': typeof RecipesRoute
   '/shopping': typeof ShoppingRoute
 }
@@ -51,20 +59,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/inventory': typeof InventoryRoute
+  '/members': typeof MembersRoute
   '/recipes': typeof RecipesRoute
   '/shopping': typeof ShoppingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/inventory' | '/recipes' | '/shopping'
+  fullPaths: '/' | '/inventory' | '/members' | '/recipes' | '/shopping'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/inventory' | '/recipes' | '/shopping'
-  id: '__root__' | '/' | '/inventory' | '/recipes' | '/shopping'
+  to: '/' | '/inventory' | '/members' | '/recipes' | '/shopping'
+  id: '__root__' | '/' | '/inventory' | '/members' | '/recipes' | '/shopping'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   InventoryRoute: typeof InventoryRoute
+  MembersRoute: typeof MembersRoute
   RecipesRoute: typeof RecipesRoute
   ShoppingRoute: typeof ShoppingRoute
 }
@@ -83,6 +93,13 @@ declare module '@tanstack/react-router' {
       path: '/inventory'
       fullPath: '/inventory'
       preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/members': {
+      id: '/members'
+      path: '/members'
+      fullPath: '/members'
+      preLoaderRoute: typeof MembersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/recipes': {
@@ -105,6 +122,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   InventoryRoute: InventoryRoute,
+  MembersRoute: MembersRoute,
   RecipesRoute: RecipesRoute,
   ShoppingRoute: ShoppingRoute,
 }
