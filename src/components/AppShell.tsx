@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, Bell, Plus, X } from "lucide-react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { ManualEntryDialog } from "@/components/ManualEntryDialog";
 import { toast } from "sonner";
 
 const NAV = [
@@ -14,10 +15,11 @@ const NAV = [
 ] as const;
 
 const ADD_OPTIONS = [
-  { emoji: "💳", title: "全聯 / 發票載具自動匯入", desc: "自動解析消費明細並匯入庫存" },
-  { emoji: "📷", title: "AI 拍照 / 發票掃描", desc: "透過 YOLO 模型辨識食材與實體發票" },
-  { emoji: "✏️", title: "手動輸入 / 家常食譜建立", desc: "手動增減庫存數量或建立家常食譜" },
+  { id: "invoice", emoji: "💳", title: "全聯 / 發票載具自動匯入", desc: "自動解析消費明細並匯入庫存" },
+  { id: "scan", emoji: "📷", title: "AI 拍照 / 發票掃描", desc: "透過 YOLO 模型辨識食材與實體發票" },
+  { id: "manual", emoji: "✏️", title: "手動輸入 / 家常食譜建立", desc: "手動增減庫存數量或建立家常食譜" },
 ];
+
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
