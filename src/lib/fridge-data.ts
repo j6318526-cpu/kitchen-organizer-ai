@@ -1,11 +1,22 @@
-export type Category = "vegetable" | "meat" | "dairy" | "other";
+export type Category = "vegetable" | "meat" | "dairy" | "fruit" | "seafood" | "other";
 
 export const CATEGORY_LABELS: Record<Category | "all", string> = {
   all: "全部",
   vegetable: "蔬菜",
   meat: "肉品",
   dairy: "乳製品",
+  fruit: "水果",
+  seafood: "海鮮",
   other: "其他",
+};
+
+export const CATEGORY_EMOJI: Record<Category, string> = {
+  vegetable: "🥬",
+  meat: "🥩",
+  dairy: "🥛",
+  fruit: "🍎",
+  seafood: "🐟",
+  other: "🍱",
 };
 
 export type FridgeItem = {
