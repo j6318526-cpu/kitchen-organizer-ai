@@ -24,6 +24,7 @@ const ADD_OPTIONS = [
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [navOpen, setNavOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
+  const [manualOpen, setManualOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
