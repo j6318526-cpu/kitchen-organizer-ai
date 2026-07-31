@@ -93,10 +93,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <div className="flex flex-col gap-3 p-5 pb-8">
             {ADD_OPTIONS.map((o) => (
               <button
-                key={o.title}
+                key={o.id}
                 onClick={() => {
                   setAddOpen(false);
-                  toast.success(`已啟動：${o.title}`);
+                  if (o.id === "manual") setManualOpen(true);
+                  else toast.success(`已啟動：${o.title}`);
                 }}
                 className="flex items-center gap-4 rounded-3xl bg-card p-4 text-left shadow-sm transition-transform active:scale-[0.99]"
               >
@@ -112,6 +113,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         </SheetContent>
       </Sheet>
+
+      <ManualEntryDialog open={manualOpen} onOpenChange={setManualOpen} />
     </div>
   );
 }
